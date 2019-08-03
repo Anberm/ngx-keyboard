@@ -1,0 +1,13 @@
+{
+  "name": "ngx-virtual-keyboard",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/animations": "^8.1.2",
+    "@angular/cdk": "5.2.2",
+    "@angular/common": "^8.1.2",
+    "@angular/core": "^8.1.2",
+    "@angular/forms": "^8.1.2",
+    "@angular/material": "^8.1.1",
+    "rxjs": "~6.4.0"
+  }
+}

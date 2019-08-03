@@ -1,20 +1,217 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<mat-tab-group>
 
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>keyboard</mat-icon>
+      Keyboard variants
+    </ng-template>
+
+    <form class="content content-keyboard-variants">
+
+      <section class="row">
+        <div class="col">
+          <mat-slide-toggle
+              [checked]="isDebug"
+              [disabled]="!keyboardVisible"
+              (change)="toggleDebug($event)"
+          >
+            Debug special keys
+          </mat-slide-toggle>
+        </div>
+
+        <div class="col">
+          <mat-slide-toggle
+              [checked]="darkTheme"
+              [disabled]="!keyboardVisible"
+              (change)="toggleDarkTheme($event)"
+          >
+            Dark theme
+          </mat-slide-toggle>
+        </div>
+      </section>
+
+      <section class="row">
+        <div class="col">
+          <button
+              mat-raised-button
+              type="button"
+              (click)="openKeyboard(defaultLocale)"
+              aria-label="Open default keyboard"
+          >
+            Open default keyboard ({{defaultLocale}})
+          </button>
+        </div>
+
+        <div class="col">
+          <mat-select
+              name="layout"
+              [placeholder]="'select layout'"
+              [(ngModel)]="locale"
+          >
+            <mat-option
+                *ngFor="let layout of layouts"
+                [value]="layout.layout.lang && layout.layout.lang[0] || layout.name"
+            >
+              {{layout.layout.name}}
+              <ng-container *ngIf="layout.layout.name !== layout.name">({{layout.name}})</ng-container>
+            </mat-option>
+          </mat-select>
+
+          <button
+              mat-raised-button
+              type="button"
+              (click)="openKeyboard(locale)"
+              aria-label="Open selected keyboard"
+          >
+            Open selected keyboard ({{locale}})
+          </button>
+        </div>
+
+        <div class="col">
+          <button
+              mat-raised-button
+              type="button"
+              (click)="closeCurrentKeyboard()"
+              aria-label="Hide the example keyboard"
+          >
+            Close keyboard
+          </button>
+        </div>
+      </section>
+
+      <section class="row">
+        <div class="col">
+          <mat-input-container>
+            <input
+                #attachTo
+                matInput
+                placeholder="Attach me if you can"
+                name="attach"
+                [(ngModel)]="attachModelValue"
+            >
+            <mat-hint>Input to attach keyboard to</mat-hint>
+          </mat-input-container>
+
+          <pre>{{ attachModelValue }}</pre>
+        </div>
+
+        <div class="col">
+          <button
+              mat-raised-button
+              type="button"
+              (click)="openAttachedKeyboard(defaultLocale)"
+              aria-label="Attach default keyboard"
+          >
+            Attach default keyboard ({{defaultLocale}})
+          </button>
+        </div>
+      </section>
+
+    </form>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>assignment</mat-icon>
+      Test form
+    </ng-template>
+
+    <form novalidate
+          class="content content-test-form"
+          #form="ngForm"
+          (ngSubmit)="form.valid && submitForm(form)"
+    >
+
+      <section class="row">
+        <div class="col">
+          <mat-input-container>
+            <input
+                matInput
+                matKeyboard
+                placeholder="From detected locale ({{ locale }})"
+                name="sushi"
+                [(ngModel)]="testModelValue"
+                (enterClick)="submitForm(form)"
+            >
+            <mat-hint>Using <code>ngModel</code> two way binding</mat-hint>
+          </mat-input-container>
+
+          <pre>{{ testModelValue }}</pre>
+        </div>
+
+        <div class="col">
+          <mat-input-container>
+            <input
+                #testSimpleValue
+                type="number"
+                matInput
+                placeholder="Swiss bank combination lock"
+                name="safe"
+                [matKeyboard]="'de-CH'"
+                [value]="123"
+                (enterClick)="submitForm(form)"
+            >
+            <mat-hint>Simple <code>Element.value</code> binding</mat-hint>
+          </mat-input-container>
+
+          <pre>{{ testSimpleValue.value }}</pre>
+        </div>
+
+        <div class="col">
+          <mat-input-container>
+            <input
+                matInput
+                matKeyboard
+                placeholder="Something with cheese"
+                name="emmentaler"
+                [formControl]="testControlValue"
+                (enterClick)="submitForm(form)"
+            >
+            <mat-hint>Reactive binding with <code>formControl</code></mat-hint>
+          </mat-input-container>
+
+          <pre>{{ testControlValue.value }}</pre>
+        </div>
+
+        <div class="col">
+          <mat-input-container>
+            <input
+                matInput
+                ngModel
+                #testModelReference="ngModel"
+                name="azerbaijani"
+                placeholder="Azərbaycanca"
+                [matKeyboard]="'Azərbaycanca'"
+                (enterClick)="submitForm(form)"
+            >
+            <mat-hint><code>ngModel</code> access by template binding</mat-hint>
+          </mat-input-container>
+
+          <pre>{{ testModelReference.value }}</pre>
+        </div>
+      </section>
+
+      <section class="row">
+        <div class="col">
+          <pre *ngFor="let submittedForm of submittedForms | async">
+            <ng-container *ngFor="let submitedValue of submittedForm">
+              {{ submitedValue.control }}: {{ submitedValue.value }}<br>
+            </ng-container>
+          </pre>
+        </div>
+
+        <div class="col">
+          <button
+              mat-raised-button
+              type="submit"
+              aria-label="Submit form"
+          >
+            Submit
+          </button>
+        </div>
+      </section>
+
+    </form>
+  </mat-tab>
+
+</mat-tab-group>

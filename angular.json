@@ -28,6 +28,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/reset-css/sass/_reset.scss",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -116,6 +118,41 @@
             "production": {
               "devServerTarget": "ngx-keyboard:serve:production"
             }
+          }
+        }
+      }
+    },
+    "ngx-virtual-keyboard": {
+      "projectType": "library",
+      "root": "projects/ngx-virtual-keyboard",
+      "sourceRoot": "projects/ngx-virtual-keyboard/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-virtual-keyboard/tsconfig.lib.json",
+            "project": "projects/ngx-virtual-keyboard/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-virtual-keyboard/src/test.ts",
+            "tsConfig": "projects/ngx-virtual-keyboard/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-virtual-keyboard/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-virtual-keyboard/tsconfig.lib.json",
+              "projects/ngx-virtual-keyboard/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
