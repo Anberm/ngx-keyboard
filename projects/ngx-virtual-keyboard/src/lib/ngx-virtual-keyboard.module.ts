@@ -59,11 +59,6 @@ import { MatKeyboardService } from './services/keyboard.service';
     MatKeyboardKeyComponent
   ],
   providers: [
-    MatKeyboardService,
-    LIVE_ANNOUNCER_PROVIDER,
-    { provide: MAT_KEYBOARD_DEADKEYS, useValue: keyboardDeadkeys },
-    { provide: MAT_KEYBOARD_ICONS, useValue: keyboardIcons },
-    { provide: MAT_KEYBOARD_LAYOUTS, useValue: keyboardLayouts }
   ]
 })
 export class NgxVirtualKeyboardModule { }

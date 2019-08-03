@@ -12,7 +12,7 @@ import {
   IKeyboardLayout,
   MatKeyboardService,
   MAT_KEYBOARD_LAYOUTS,
-} from 'projects/ngx-virtual-keyboard/src/public-api';
+} from 'ngx-virtual-keyboard';
 import { NgModel, NgControl, FormControl, NgForm } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 

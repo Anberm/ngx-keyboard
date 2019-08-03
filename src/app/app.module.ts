@@ -10,48 +10,45 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { IKeyboardLayouts, keyboardLayouts, MAT_KEYBOARD_LAYOUTS, NgxVirtualKeyboardModule } from 'ngx-virtual-keyboard';
+import {
+  IKeyboardLayouts,
+  keyboardLayouts,
+  MAT_KEYBOARD_LAYOUTS,
+  NgxVirtualKeyboardModule,
+  MatKeyboardContainerComponent,
+} from 'ngx-virtual-keyboard';
 
 import { AppComponent } from './app.component';
 
 const customLyouts: IKeyboardLayouts = {
   ...keyboardLayouts,
   'Tolles Layout': {
-    'name': 'Awesome layout',
-    'keys': [
-      [
-        ['1', '!'],
-        ['2', '@'],
-        ['3', '#']
-      ]
-    ],
-    'lang': ['de-CH']
-  }
+    name: 'Awesome layout',
+    keys: [[['1', '!'], ['2', '@'], ['3', '#']]],
+    lang: ['de-CH'],
+  },
 };
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
-     // Angular modules
-     BrowserModule,
-     BrowserAnimationsModule,
-     FormsModule,
-     ReactiveFormsModule,
- 
-     // Material modules
-     MatButtonModule,
-     MatIconModule,
-     MatInputModule,
-     MatSelectModule,
-     MatSlideToggleModule,
-     MatTabsModule,
- 
-     NgxVirtualKeyboardModule
+    // Angular modules
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+
+    // Material modules
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatTabsModule,
+
+    NgxVirtualKeyboardModule,
   ],
-  providers: [
-    { provide: MAT_KEYBOARD_LAYOUTS, useValue: customLyouts }
-  ],
-  bootstrap: [AppComponent]
+  entryComponents: [MatKeyboardContainerComponent],
+  providers: [{ provide: MAT_KEYBOARD_LAYOUTS, useValue: customLyouts }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -82,7 +82,7 @@ export class MatKeyboardContainerComponent extends BasePortalOutlet
   private _destroyed = false;
 
   /** The portal outlet inside of this container into which the keyboard content will be loaded. */
-  @ViewChild(CdkPortalOutlet, { static: false })
+  @ViewChild(CdkPortalOutlet, { static: true })
   private _portalOutlet: CdkPortalOutlet;
 
   /** The state of the keyboard animations. */

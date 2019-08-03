@@ -13,6 +13,10 @@ import { IKeyboardDeadkeys } from '../interfaces/keyboard-deadkeys.interface';
 
 const MAT_KEYBOARD_DEADKEYS = new InjectionToken<IKeyboardDeadkeys>(
   'keyboard-deadkey.config',
+  {
+    providedIn: 'root',
+    factory: () => keyboardDeadkeys,
+  },
 );
 const keyboardDeadkeys: IKeyboardDeadkeys = {
   '"': {

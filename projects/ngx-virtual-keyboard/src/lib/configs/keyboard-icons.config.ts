@@ -4,6 +4,10 @@ import { IKeyboardIcons } from '../interfaces/keyboard-icons.interface';
 
 const MAT_KEYBOARD_ICONS = new InjectionToken<IKeyboardIcons>(
   'keyboard-icons.config',
+  {
+    providedIn: 'root',
+    factory: () => keyboardIcons,
+  },
 );
 const keyboardIcons: IKeyboardIcons = {
   [KeyboardClassKey.Bksp]: 'keyboard_backspace',

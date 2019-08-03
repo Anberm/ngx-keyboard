@@ -26,7 +26,7 @@ import {
 /**
  * Service to dispatch Material Design keyboard.
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MatKeyboardService {
   /**
    * Reference to the current keyboard in the view *at this level* (in the Angular injector tree).

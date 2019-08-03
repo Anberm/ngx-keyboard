@@ -105,6 +105,10 @@ import { IKeyboardLayouts } from '../interfaces/keyboard-layouts.interface';
 
 const MAT_KEYBOARD_LAYOUTS = new InjectionToken<IKeyboardLayouts>(
   'keyboard-layouts.config',
+  {
+    providedIn: 'root',
+    factory: () => keyboardLayouts,
+  },
 );
 const keyboardLayouts: IKeyboardLayouts = {
   العربية: {
